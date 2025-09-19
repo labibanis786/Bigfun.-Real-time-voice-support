@@ -1,0 +1,53 @@
+# Flutter/Dart/Pub
+.dart_tool/
+.packages
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+
+# Symbolic links created by flutter
+.linked_packages/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Miscellaneous
+*.log
+*.tmp
+*.swp
+*.lock
+
+# Generated files
+*.g.dart
+
+# Android
+android/.gradle/
+android/app/build/
+android/local.properties
+android/key.properties
+
+# iOS
+ios/Pods/
+ios/Runner/GeneratedPluginRegistrant.*
+ios/Flutter/Flutter.podspec
+ios/.symlinks/
+
+# macOS
+macos/Pods/
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Web
+lib/generated_plugin_registrant.dart
+
+# Linux
+linux/flutter/ephemeral/
+
+# Windows
+windows/flutter/ephemeral/
+
+# Codemagic cache
+.codemagic/

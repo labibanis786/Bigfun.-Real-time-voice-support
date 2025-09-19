@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.BigFun" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+    </style>
+</resources>
