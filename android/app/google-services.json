@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "617677724459",
+    "project_id": "bigfun-602f8",
+    "storage_bucket": "bigfun-602f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617677724459:android:1f2c83b6b56b20a93232c9",
+        "android_client_info": {
+          "package_name": "com.bigfun.voiceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZUsaQZrxj8KkAGeRHe95XbbYX0QlMslA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
