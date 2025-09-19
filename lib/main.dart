@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; // Import your login screen
+import 'config/agora_config.dart'; // Agora App ID config
 
 void main() {
-  runApp(const MyApp()); // Entry point of the Flutter app
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,12 +11,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Hide the debug banner
-      title: 'BigFun App',
+      debugShowCheckedModeBanner: false,
+      title: 'BigFun Voice Chat',
       theme: ThemeData(
-        primarySwatch: Colors.blue, // Set the main theme color
+        primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(), // The first screen will be LoginScreen
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('BigFun Voice Chat'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Welcome to BigFun!'),
+            const SizedBox(height: 20),
+            Text('Agora App ID: ${AgoraConfig.appId}'),
+          ],
+        ),
+      ),
     );
   }
 }
