@@ -1,0 +1,27 @@
+name: bigfun_voice
+description: BigFun full project (voice + auth + wallet placeholders)
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  permission_handler: ^11.3.0
+  agora_rtc_engine: ^6.2.2
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.6.0
+  cloud_firestore: ^4.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/avatar.png
