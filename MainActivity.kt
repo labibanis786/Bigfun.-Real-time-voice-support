@@ -1,4 +1,4 @@
-package com.example.bigfun
+package com.bigfun.placeholder
 
 import io.flutter.embedding.android.FlutterActivity
 
