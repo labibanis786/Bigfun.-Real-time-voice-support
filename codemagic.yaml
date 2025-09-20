@@ -1,30 +1,27 @@
 workflows:
-  build-android-release:
-    name: Build Android Release (create project runtime)
+  android-release:
+    name: Android Release
+    max_build_duration: 60
     environment:
+      flutter: 3.22.2
+      xcode: latest
       vars:
-        ANDROID_KEYSTORE_BASE64: EncryptedBase64Placeholder
-        ANDROID_KEYSTORE_PASSWORD: Bigfun@2580
-        ANDROID_KEYSTORE_ALIAS: bigfun
-        ANDROID_KEY_PASSWORD: Bigfun@2580
+        CM_KEYSTORE: /tmp/keystore.jks
+        CM_KEYSTORE_PASSWORD: Bigfun@2580
+        CM_KEY_ALIAS: bigfun
+        CM_KEY_PASSWORD: Bigfun@2580
     scripts:
-      - name: Create flutter app and copy files
+      - name: Clean project
         script: |
-          flutter --version
-          flutter create -t app tmp_bigfun_app
-          rm -rf tmp_bigfun_app/lib
-          rm -f tmp_bigfun_app/pubspec.yaml
-          cp -r lib tmp_bigfun_app/lib
-          cp pubspec.yaml tmp_bigfun_app/pubspec.yaml
-          cp google-services.json tmp_bigfun_app/android/app/google-services.json || true
-          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > tmp_bigfun_app/android/app/key.jks || true
-      - name: Flutter pub get
-        script: |
-          cd tmp_bigfun_app
-          flutter pub get
+          flutter clean
+          rm -rf android/.gradle
+      - name: Get dependencies
+        script: flutter pub get
       - name: Build APK
         script: |
-          cd tmp_bigfun_app
-          flutter build apk --release --no-shrink
+          cd android
+          ./gradlew clean
+          cd ..
+          flutter build apk --release
     artifacts:
-      - tmp_bigfun_app/build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/flutter-apk/app-release.apk
