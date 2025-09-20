@@ -11,23 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1) Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2) Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
+      # 3) Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
+      # 4) Decode keystore
       - name: Decode keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/my-release-key.jks
 
+      # 5) Create key.properties
       - name: Create key.properties
         run: |
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
@@ -35,12 +40,14 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=my-release-key.jks" >> android/key.properties
 
+      # 6) Decode google-services.json
       - name: Decode google-services.json
         env:
-          GSJ: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+          GSJJSON: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
         run: |
-          echo "$GSJ" | base64 --decode > android/app/google-services.json
+          echo "$GSJJSON" | base64 --decode > android/app/google-services.json
 
+      # 7) Save Agora secrets into config file
       - name: Write Agora config
         run: |
           mkdir -p lib/config
@@ -49,18 +56,22 @@ jobs:
           echo "  static const String certificate = '';" >> lib/config/agora_config.dart
           echo "}" >> lib/config/agora_config.dart
 
+      # 8) Build APK (release)
       - name: Build APK (release)
         run: flutter build apk --release
 
+      # 9) Build AAB (release)
       - name: Build AAB (release)
         run: flutter build appbundle --release
 
+      # 10) Upload APK artifact
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
+      # 11) Upload AAB artifact
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
