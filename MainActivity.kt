@@ -1,4 +1,4 @@
-package com.bigfun.placeholder
+package com.bigfun.voiceapp
 
 import io.flutter.embedding.android.FlutterActivity
 
