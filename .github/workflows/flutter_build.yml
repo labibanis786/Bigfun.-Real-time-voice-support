@@ -4,11 +4,15 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       # 1) Checkout repository
       - name: Checkout repository
@@ -34,9 +38,9 @@ jobs:
       # 5) Create key.properties
       - name: Create key.properties
         run: |
-          echo "storePassword=Bigfun@2580" >> android/key.properties
-          echo "keyPassword=Bigfun@2580" >> android/key.properties
-          echo "keyAlias=bigfun" >> android/key.properties
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=my-release-key.jks" >> android/key.properties
 
       # 6) Decode google-services.json
@@ -54,14 +58,14 @@ jobs:
       - name: Build AAB (release)
         run: flutter build appbundle --release
 
-      # 9) Upload APK
+      # 9) Upload APK artifact
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      # 10) Upload AAB
+      # 10) Upload AAB artifact
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
